@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Cetak Transaksi - <%= appName %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body onload="window.print()">
+  <div class="container">
+    <div class="card">
+      <h2 style="margin:0">Laporan Transaksi</h2>
+      <% if (student) { %>
+        <div>Siswa: <strong><%= student.name %></strong></div>
+      <% } else { %>
+        <div>Siswa: <strong>Semua</strong></div>
+      <% } %>
+      <div>Periode: <strong><%= filter.from || '-' %></strong> s/d <strong><%= filter.to || '-' %></strong></div>
+      <div>Tanggal Cetak: <strong><%= dayjs().format('YYYY-MM-DD HH:mm') %></strong></div>
+    </div>
+    <div class="card">
+      <table>
+        <thead><tr><th>#</th><th>Tanggal</th><th>Jenis</th><th>Nominal</th><th>Catatan</th></tr></thead>
+        <tbody>
+          <% transactions.forEach((t,i) => { %>
+            <tr>
+              <td><%= i+1 %></td>
+              <td><%= dayjs(t.created_at).format('YYYY-MM-DD HH:mm') %></td>
+              <td><%= t.type %></td>
+              <td>Rp <%= Math.abs(t.amount).toLocaleString('id-ID') %></td>
+              <td><%= t.note || '-' %></td>
+            </tr>
+          <% }) %>
+          <% if (transactions.length === 0) { %>
+            <tr><td colspan="5">Tidak ada data.</td></tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

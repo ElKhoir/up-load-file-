@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Masuk - <%= appName %></title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css">
+  <meta name="theme-color" content="#4f46e5">
+</head>
+<body>
+  <div class="container" style="max-width:420px;margin-top:10vh;">
+    <div class="card">
+      <div style="text-align:center;margin-bottom:1rem;">
+        <img src="/icon-192.png" width="64" height="64" alt="">
+        <h2 style="margin:.5rem 0">Masuk</h2>
+        <p style="color:#64748b">Gunakan akun yang telah dibuat admin.</p>
+      </div>
+      <% if (error) { %>
+        <div class="card" style="background:#fee2e2;color:#991b1b;margin-bottom:1rem;">⚠️ <%= error %></div>
+      <% } %>
+      <form method="post" action="/login">
+        <label>Username</label>
+        <input name="username" required>
+        <label>Password</label>
+        <input name="password" type="password" required>
+        <button class="btn" style="width:100%;margin-top:.8rem;">Masuk</button>
+      </form>
+      <p style="margin-top:1rem;font-size:.9rem;color:#475569">Akun demo: admin/admin123 (admin) • fauzi/fauzi123 (siswa)</p>
+    </div>
+  </div>
+  <script src="/client.js"></script>
+</body>
+</html>

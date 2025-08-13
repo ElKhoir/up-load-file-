@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= appName %></title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css">
+  <meta name="theme-color" content="#4f46e5">
+</head>
+<body>
+  <header class="header no-print">
+    <div class="container">
+      <div style="display:flex;gap:.6rem;align-items:center">
+        <img src="/icon-192.png" alt="icon" width="32" height="32" />
+        <strong><%= appName %></strong>
+        <span class="badge">PWA</span>
+      </div>
+      <nav>
+        <% if (user) { %>
+          <% if (user.role === 'admin') { %>
+            <a href="/admin" style="margin-right:.8rem">Dashboard</a>
+            <a href="/admin/students" style="margin-right:.8rem">Siswa</a>
+            <a href="/admin/transactions" style="margin-right:.8rem">Transaksi</a>
+          <% } else { %>
+            <a href="/me" style="margin-right:.8rem">Saldo Saya</a>
+          <% } %>
+          <form action="/logout" method="post" class="inline">
+            <button class="btn">Keluar</button>
+          </form>
+        <% } %>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <%- body %>
+  </main>
+  <script src="/client.js"></script>
+</body>
+</html>

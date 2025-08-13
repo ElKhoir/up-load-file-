@@ -1,0 +1,26 @@
+
+<div class="card">
+  <h2 style="margin:.2rem 0">Halo, <%= student.name %></h2>
+  <div>Kelas: <strong><%= student.kelas || '-' %></strong></div>
+  <div style="margin-top:.6rem;font-size:1.1rem;">Saldo Anda: <strong>Rp <%= (balance||0).toLocaleString('id-ID') %></strong></div>
+</div>
+
+<div class="card">
+  <h3>Riwayat Transaksi</h3>
+  <table>
+    <thead><tr><th>Tanggal</th><th>Jenis</th><th>Nominal</th><th>Catatan</th></tr></thead>
+    <tbody>
+      <% transactions.forEach(t => { %>
+        <tr>
+          <td><%= dayjs(t.created_at).format('YYYY-MM-DD HH:mm') %></td>
+          <td><%= t.type %></td>
+          <td>Rp <%= Math.abs(t.amount).toLocaleString('id-ID') %></td>
+          <td><%= t.note || '-' %></td>
+        </tr>
+      <% }) %>
+      <% if (transactions.length === 0) { %>
+        <tr><td colspan="4">Belum ada transaksi.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

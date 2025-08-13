@@ -1,0 +1,52 @@
+
+<div class="card">
+  <form method="get" action="/admin/students" style="display:flex;gap:.5rem;align-items:center;">
+    <input type="search" name="q" placeholder="Cari nama/kelas/HP..." value="<%= q %>" style="flex:1;">
+    <button class="btn">Cari</button>
+  </form>
+</div>
+<div class="grid">
+  <div class="card">
+    <h3>Tambah Siswa</h3>
+    <form method="post" action="/admin/students" style="display:grid;gap:.6rem;">
+      <label>Nama</label>
+      <input name="name" required>
+      <label>Kelas</label>
+      <input name="kelas">
+      <label>No. HP (opsional)</label>
+      <input name="phone">
+      <button class="btn">Simpan</button>
+    </form>
+  </div>
+  <div class="card" style="grid-column: span 2;">
+    <h3>Daftar Siswa</h3>
+    <table>
+      <thead><tr><th>Nama</th><th>Kelas</th><th>HP</th><th>Saldo</th><th class="no-print">Aksi</th></tr></thead>
+      <tbody>
+        <% students.forEach(s => { %>
+          <tr>
+            <td><%= s.name %></td>
+            <td><%= s.kelas || '-' %></td>
+            <td><%= s.phone || '-' %></td>
+            <td>Rp <%= (s.balance||0).toLocaleString('id-ID') %></td>
+            <td class="no-print">
+              <form class="inline" method="post" action="/admin/students/<%= s.id %>/deposit">
+                <input type="number" name="amount" min="100" step="100" placeholder="Nominal" required style="width:130px">
+                <input name="note" placeholder="Catatan" style="width:170px">
+                <button class="btn">Setor</button>
+              </form>
+              <form class="inline" method="post" action="/admin/students/<%= s.id %>/withdraw" style="margin-left:.3rem">
+                <input type="number" name="amount" min="100" step="100" placeholder="Nominal" required style="width:130px">
+                <input name="note" placeholder="Catatan" style="width:170px">
+                <button class="btn danger">Tarik</button>
+              </form>
+              <form class="inline" method="post" action="/admin/students/<%= s.id %>/delete" style="margin-left:.3rem" onsubmit="return confirm('Hapus siswa ini?')">
+                <button class="btn" style="background:#6b7280">Hapus</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

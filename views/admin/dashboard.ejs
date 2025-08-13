@@ -1,0 +1,29 @@
+
+<div class="grid">
+  <div class="card">
+    <div>Total Siswa</div>
+    <h2 style="margin:.3rem 0"><%= stats.totalStudents %> siswa</h2>
+  </div>
+  <div class="card">
+    <div>Total Saldo Terkumpul</div>
+    <h2 style="margin:.3rem 0">Rp <%= (stats.totalBalance || 0).toLocaleString('id-ID') %></h2>
+  </div>
+  <div class="card">
+    <div>Transaksi Hari Ini</div>
+    <h2 style="margin:.3rem 0"><%= stats.lastTx %> transaksi</h2>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Langkah Cepat</h3>
+  <p><a class="btn" href="/admin/students">Kelola Siswa</a>
+     <a class="btn secondary" href="/admin/transactions" style="margin-left:.5rem;">Riwayat Transaksi</a></p>
+</div>
+
+<div class="card">
+  <h3>Tips</h3>
+  <ul>
+    <li>Untuk meng-install di Android: buka di Chrome → ⋮ → Tambahkan ke Layar Utama.</li>
+    <li>Gunakan halaman <strong>Transaksi</strong> untuk mencetak laporan per siswa atau per rentang tanggal.</li>
+  </ul>
+</div>

@@ -1,0 +1,46 @@
+
+<div class="card">
+  <form method="get" action="/admin/transactions" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));align-items:end;">
+    <div>
+      <label>Siswa</label>
+      <select name="student_id">
+        <option value="">Semua siswa</option>
+        <% students.forEach(s => { %>
+          <option value="<%= s.id %>" <%= (filter.student_id==s.id?'selected':'') %>><%= s.name %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div>
+      <label>Dari (YYYY-MM-DD)</label>
+      <input type="date" name="from" value="<%= filter.from || '' %>">
+    </div>
+    <div>
+      <label>Sampai (YYYY-MM-DD)</label>
+      <input type="date" name="to" value="<%= filter.to || '' %>">
+    </div>
+    <div>
+      <button class="btn">Terapkan</button>
+      <a class="btn secondary" href="/admin/transactions/print?<%= new URLSearchParams(filter).toString() %>" target="_blank">Cetak</a>
+    </div>
+  </form>
+</div>
+<div class="card">
+  <table>
+    <thead><tr><th>Waktu</th><th>Siswa</th><th>Jenis</th><th>Nominal</th><th>Catatan</th><th>Admin</th></tr></thead>
+    <tbody>
+      <% transactions.forEach(t => { %>
+        <tr>
+          <td><%= dayjs(t.created_at).format('YYYY-MM-DD HH:mm') %></td>
+          <td><%= t.student_name %></td>
+          <td><%= t.type %></td>
+          <td>Rp <%= Math.abs(t.amount).toLocaleString('id-ID') %></td>
+          <td><%= t.note || '-' %></td>
+          <td><%= t.admin_username || '-' %></td>
+        </tr>
+      <% }) %>
+      <% if (transactions.length === 0) { %>
+        <tr><td colspan="6">Tidak ada data.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
