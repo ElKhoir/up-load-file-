@@ -1,7 +1,6 @@
 {
   "name": "tabungan-santri-alhidayah-vercel-neon",
   "version": "1.0.0",
-  "description": "Tabungan Santri Alhidayah - Vercel Serverless + Neon Postgres + Express + EJS + PWA",
   "type": "module",
   "scripts": {
     "dev": "node server.js",
@@ -9,14 +8,14 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.9.5",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-session": "^2.0.0",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-ejs-layouts": "^2.5.1",
     "method-override": "^3.0.0",
-    "cookie-session": "^2.0.0",
     "serverless-http": "^3.2.0"
   }
 }
